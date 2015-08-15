@@ -1,7 +1,11 @@
-Role Name
+foreman-proxy
 =========
 
-A brief description of the role goes here.
+This is almost bare role that installs and barely configures foreman-proxy.
+
+Docs are on the way.
+
+PRs are welcomed.
 
 Requirements
 ------------
@@ -32,7 +36,16 @@ License
 
 BSD
 
+
+## Contributing
+
+ Send your suggestions and pull requests to https://github.com/kostyrevaa/ansible-role-foreman-proxy
+
+ When send PR make sure your changes are backward-compatible.
+
+
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Aleksndr Kostyrev
+
