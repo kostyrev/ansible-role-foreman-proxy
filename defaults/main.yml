@@ -1,0 +1,52 @@
+---
+# defaults file for kostyrevaa.foreman-proxy
+foreman_proxy_register: false
+foreman_proxy_user: 'foreman-proxy'
+foreman_proxy_group: 'foreman-proxy'
+foreman_proxy_protocol: http
+foreman_proxy_tftp: "{{ foreman_proxy_protocol }}"
+foreman_proxy_dhcp: "{{ foreman_proxy_protocol }}"
+foreman_proxy_dns: "{{ foreman_proxy_protocol }}"
+
+foreman_proxy_tftp_dirs:
+  - "pxelinux.cfg"
+  - "boot"
+
+foreman_proxy_tftp_files:
+  - pxelinux.0
+  - menu.c32
+  - memdisk
+  - chain.c32
+
+foreman_proxy_syslinux_dir: /usr/share/syslinux
+
+foreman_proxy_dhcp_vendor: isc
+foreman_proxy_dhcp_config: '/etc/dhcp/dhcpd.conf'
+foreman_proxy_dhcp_leases: /var/lib/dhcp/dhcpd.leases
+foreman_proxy_dhcp_omapi_port: 7911
+
+foreman_proxy_dns_provider: nsupdate
+foreman_proxy_dns_server: 127.0.0.1
+foreman_proxy_dns_ttl: 86400
+foreman_proxy_dns_tsig_keytab: /etc/foreman-proxy/dns.keytab
+foreman_proxy_dns_tsig_principal: "foremanproxy/{{ ansible_fqdn }}@{{ ansible_domain }}"
+foreman_proxy_keyfile: /etc/rndc.key
+
+foreman_proxy_ssl: false
+foreman_proxy_ssl_ca: /var/lib/puppet/ssl/certs/ca.pem
+foreman_proxy_ssl_cert: "/var/lib/puppet/ssl/certs/{{ ansible_fqdn }}.pem"
+foreman_proxy_ssl_key: "/var/lib/puppet/ssl/private_keys/{{ ansible_fqdn }}.pem"
+
+foreman_proxy_trusted_hosts:
+  - "{{ ansible_fqdn }}"
+
+foreman_proxy_foreman_base_url: "{{ ansible_fqdn }}"
+
+foreman_proxy_bind_host: '*'
+foreman_proxy_ssl_port: '8443'
+foreman_proxy_http_port: 8080
+
+foreman_proxy_virsh_network: default
+
+foreman_proxy_log: /var/log/foreman-proxy/proxy.log
+foreman_proxy_log_level: ERROR

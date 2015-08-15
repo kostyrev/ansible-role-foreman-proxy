@@ -1,0 +1,4 @@
+---
+# handlers file for kostyrevaa.foreman-proxy
+- name: restart foreman-proxy
+  service: name=foreman-proxy state=restarted

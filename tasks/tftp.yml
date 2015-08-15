@@ -1,0 +1,11 @@
+---
+
+- name: set right perms on tftp directories
+  file: path={{ tftp_root_directory }}/{{ item }} state=directory mode=0755 owner={{ foreman_proxy_user }}
+  with_items: foreman_proxy_tftp_dirs
+
+- name: Make PXEBoot files available
+  command: cp "{{ foreman_proxy_syslinux_dir }}/{{ item }}" "{{ tftp_root_directory }}/{{ item }}"
+  args:
+    creates: "{{ tftp_root_directory }}/{{ item }}"
+  with_items: foreman_proxy_tftp_files

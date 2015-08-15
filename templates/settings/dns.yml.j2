@@ -1,0 +1,24 @@
+---
+# DNS management
+:enabled: {{ foreman_proxy_dns | lower }}
+# valid providers:
+#   dnscmd (Microsoft Windows native implementation)
+#   nsupdate
+#   nsupdate_gss (for GSS-TSIG support)
+#   virsh (simple implementation for libvirt)
+:dns_provider:  {{ foreman_proxy_dns_provider }}
+# use this setting if you are managing a dns server which is not localhost though this proxy
+:dns_server: {{ foreman_proxy_dns_server }}
+# use this setting if you want to override default TTL setting (86400)
+:dns_ttl: {{ foreman_proxy_dns_ttl }}
+# use dns_tsig_* for GSS-TSIG updates using Kerberos.  Required for Windows MS DNS with
+# Secure Dynamic Updates, or BIND as used in FreeIPA.  Set dns_provider to nsupdate_gss.
+{% if foreman_proxy_dns_provider == 'nsupdate_gss' %}
+:dns_tsig_keytab: {{ foreman_proxy_dns_tsig_keytab }}
+:dns_tsig_principal: {{ foreman_proxy_dns_tsig_principal }}
+# dns_key must be disabled if nsupdate_gss is used
+{% else %}
+:dns_key: {{ foreman_proxy_keyfile }}
+#:dns_tsig_keytab: /usr/share/foreman-proxy/dns.keytab
+#:dns_tsig_principal: DNS/host.example.com@EXAMPLE.COM
+{% endif %}

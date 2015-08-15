@@ -1,0 +1,10 @@
+---
+
+- name: install foreman-proxy package
+  yum: name=foreman-proxy state=present
+
+- name: install foreman rubygem-apipie-bindings package
+  yum: name=rubygem-apipie-bindings state=present
+  when: foreman_proxy_register  
+
+

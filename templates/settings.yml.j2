@@ -1,0 +1,85 @@
+---
+### File managed with ansible ###
+:settings_directory: /etc/foreman-proxy/settings.d
+
+# SSL Setup
+
+# if enabled, all communication would be verfied via SSL
+# NOTE that both certificates need to be signed by the same CA in order for this to work
+# see http://theforeman.org/projects/smart-proxy/wiki/SSL for more information
+{% if foreman_proxy_ssl == true %}
+:ssl_ca_file: {{ foreman_proxy_ssl_ca }}
+:ssl_certificate: <%= scope.lookupvar("foreman_proxy::ssl_cert") %>
+:ssl_private_key: <%= scope.lookupvar("foreman_proxy::ssl_key") %>
+{% else %}
+#:ssl_ca_file: {{ foreman_proxy_ssl_ca }}
+#:ssl_certificate: <%= scope.lookupvar("foreman_proxy::ssl_cert") %>
+#:ssl_private_key: <%= scope.lookupvar("foreman_proxy::ssl_key") %>
+{% endif %}
+
+# the hosts which the proxy accepts connections from
+# commenting the following lines would mean every verified SSL connection allowed
+{% if foreman_proxy_trusted_hosts is defined %}
+:trusted_hosts:
+{% for host in foreman_proxy_trusted_hosts %}
+  - {{ host }}
+{% endfor %}
+{% else %}
+#:trusted_hosts:
+#- foreman.prod.domain
+#- foreman.dev.domain
+{% endif %}
+
+# Endpoint for reverse communication
+:foreman_url: {{ foreman_proxy_foreman_base_url }}
+
+# SSL settings for client authentication against Foreman. If undefined, the values
+# from general SSL options are used instead. Mainly useful when Foreman uses
+# different certificates for its web UI and for smart-proxy requests.
+{% if foreman_proxy_foreman_ssl_ca is defined %}
+:foreman_ssl_ca: {{ foreman_proxy_foreman_ssl_ca }}
+{% else %}
+#:foreman_ssl_ca: ssl/certs/ca.pem
+{% endif %}
+{% if foreman_proxy_foreman_ssl_cert is defined %}
+:foreman_ssl_cert: {{ foreman_proxy_foreman_ssl_cert }}
+{% else %}
+#:foreman_ssl_cert: ssl/certs/fqdn.pem
+{% endif %}
+{% if foreman_proxy_foreman_ssl_key is defined %}
+:foreman_ssl_key: {{ foreman_proxy_foreman_ssl_key }}
+{% else %}
+#:foreman_ssl_key: ssl/private_keys/fqdn.pem
+{% endif %}
+
+# by default smart_proxy runs in the foreground. To enable running as a daemon, uncomment 'daemon' setting
+:daemon: true
+# Only used when 'daemon' is set to true.
+# Uncomment and modify if you want to change the default pid file '/var/run/foreman-proxy/foreman-proxy.pid'
+#:daemon_pid: /var/run/foreman-proxy/foreman-proxy.pid
+
+# host and ports configuration
+# Host or IPs to bind on (e.g. *, localhost, 0.0.0.0, ::, 192.168.1.20)
+:bind_host: {{ foreman_proxy_bind_host }}
+# http is disabled by default. To enable, uncomment 'http_port' setting
+# https is enabled if certificate, CA certificate, and private key are present in locations specifed by
+# ssl_certificate, ssl_ca_file, and ssl_private_key correspondingly
+# default values for https_port is 8443
+{% if foreman_proxy_ssl == true %}
+:https_port: {{ foreman_proxy_ssl_port }}
+#:http_port: {{ foreman_proxy_http_port }}
+{% else %}
+#:https_port: {{ foreman_proxy_ssl_port }}
+:http_port: {{ foreman_proxy_http_port }}
+{% endif %}
+
+
+# shared options for virsh DNS/DHCP provider
+:virsh_network: {{ foreman_proxy_virsh_network }}
+
+# Where our proxy log files are stored
+# filename or STDOUT
+:log_file: {{ foreman_proxy_log }}
+# valid options are
+# WARN, DEBUG, Error, Fatal, INFO, UNKNOWN
+:log_level: {{ foreman_proxy_log_level }}

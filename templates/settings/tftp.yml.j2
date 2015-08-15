@@ -1,0 +1,11 @@
+---
+# TFTP management
+:enabled: {{ foreman_proxy_tftp | lower }}
+:tftproot: {{ tftp_root_directory }}
+
+# Defines the TFTP Servername to use, overrides the name in the subnet declaration
+{% if foreman_proxy_tftp_servername is defined %}
+:tftp_servername: {{ foreman_proxy_tftp_servername }}
+{% else %}
+#:tftp_servername: tftp.domain.com
+{% endif %}

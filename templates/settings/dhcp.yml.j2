@@ -1,0 +1,38 @@
+---
+# Enable DHCP management
+:enabled: {{ foreman_proxy_dhcp | lower }}
+# valid vendors:
+#   - isc
+#   - native_ms (Microsoft native implementation)
+#   - virsh (simple implementation for libvirt)
+{% if foreman_proxy_dhcp is defined %}
+:dhcp_vendor: {{ foreman_proxy_dhcp_vendor }}
+:dhcp_config: {{ foreman_proxy_dhcp_config }}
+:dhcp_leases: {{ foreman_proxy_dhcp_leases }}
+{% if foreman_proxy_dhcp_key_name is defined %}
+:dhcp_key_name: {{ foreman_proxy_dhcp_key_name }}
+{% else %}
+#:dhcp_key_name: secret_key_name
+{% endif %}
+{% if foreman_proxy_dhcp_key_secret is defined %}
+:dhcp_key_secret: {{ foreman_proxy_dhcp_key_secret }}
+{% else %}
+#:dhcp_key_secret: secret_key
+{% endif %}
+:dhcp_omapi_port:  {{ foreman_proxy_dhcp_omapi_port }}
+{% else %}
+# The vendor can be either isc or native_ms
+:dhcp_vendor: isc
+# dhcp_subnets is a Native MS implementation setting. It restricts the subnets queried to a
+# subset, so as to reduce the query time.
+#:dhcp_subnets: [192.168.205.0/255.255.255.128, 192.168.205.128/255.255.255.128]
+# Settings for Ubuntu ISC
+#:dhcp_config: /etc/dhcp3/dhcpd.conf
+#:dhcp_leases: /var/lib/dhcp3/dhcpd.leases
+# Settings for Redhat ISC
+#:dhcp_config: /etc/dhcpd.conf
+#:dhcp_leases: /var/lib/dhcpd/dhcpd.leases
+#:dhcp_key_name: secret_key_name
+#:dhcp_key_secret: secret_key
+#:dhcp_omapi_port: 7911
+{% endif %}

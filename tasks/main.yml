@@ -1,0 +1,10 @@
+---
+# tasks file for kostyrevaa.foreman-proxy
+
+- include: install.yml
+  tags:
+    - foreman-proxy
+
+- include: config.yml
+  tags:
+    - foreman-proxy
