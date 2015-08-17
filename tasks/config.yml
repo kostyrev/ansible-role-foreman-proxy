@@ -1,7 +1,7 @@
 ---
 
 - include: tftp.yml
-  when: foreman_proxy_tftp
+  when: foreman_proxy_tftp is defined
   tags:
     - foreman-tftp
 

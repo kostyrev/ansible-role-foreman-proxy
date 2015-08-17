@@ -4,6 +4,7 @@ foreman_proxy_register: false
 foreman_proxy_user: 'foreman-proxy'
 foreman_proxy_group: 'foreman-proxy'
 foreman_proxy_protocol: http
+
 foreman_proxy_tftp: "{{ foreman_proxy_protocol }}"
 foreman_proxy_dhcp: "{{ foreman_proxy_protocol }}"
 foreman_proxy_dns: "{{ foreman_proxy_protocol }}"
