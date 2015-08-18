@@ -6,5 +6,4 @@
     - foreman-proxy
 
 - include: config.yml
-  tags:
-    - foreman-proxy
+
