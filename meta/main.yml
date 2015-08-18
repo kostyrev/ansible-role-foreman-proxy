@@ -8,11 +8,14 @@ galaxy_info:
   platforms:
   - name: EL
     versions:
+      - 6
       - 7
   categories:
     - cloud
     - system
-dependencies: []
-# dependencies:
-#   - bertvv.tftp
-#   - pdellaert.dhcp_server
+dependencies:
+  - bertvv.tftp
+  - pdellaert.dhcp_server
+  - patrik.uytterhoeven.PostgreSQL-For-RHEL6x
+  - geerlingguy.apache
+  - kostyrevaa.foreman
