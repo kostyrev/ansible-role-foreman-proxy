@@ -45,7 +45,7 @@ foreman_proxy_foreman_base_url: "{{ ansible_fqdn }}"
 
 foreman_proxy_bind_host: '*'
 foreman_proxy_ssl_port: '8443'
-foreman_proxy_http_port: 8080
+foreman_proxy_http_port: 9000
 
 foreman_proxy_virsh_network: default
 
