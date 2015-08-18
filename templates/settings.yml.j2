@@ -60,7 +60,7 @@
 
 # host and ports configuration
 # Host or IPs to bind on (e.g. *, localhost, 0.0.0.0, ::, 192.168.1.20)
-:bind_host: {{ foreman_proxy_bind_host }}
+:bind_host: '{{ foreman_proxy_bind_host }}'
 # http is disabled by default. To enable, uncomment 'http_port' setting
 # https is enabled if certificate, CA certificate, and private key are present in locations specifed by
 # ssl_certificate, ssl_ca_file, and ssl_private_key correspondingly
