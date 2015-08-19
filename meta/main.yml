@@ -14,8 +14,4 @@ galaxy_info:
     - cloud
     - system
 dependencies:
-  - bertvv.tftp
-  - pdellaert.dhcp_server
-  - patrik.uytterhoeven.PostgreSQL-For-RHEL6x
-  - geerlingguy.apache
   - kostyrevaa.foreman
