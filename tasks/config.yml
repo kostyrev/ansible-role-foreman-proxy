@@ -4,6 +4,7 @@
   when: foreman_proxy_tftp is defined
   tags:
     - foreman-tftp
+    - foreman-proxy
 
 - name: render /etc/foreman-proxy/settings.yml
   template: src=settings.yml.j2 dest=/etc/foreman-proxy/settings.yml owner=root group={{ foreman_proxy_group }} mode=0640
@@ -26,3 +27,6 @@
 
 - name: enable foreman-proxy service
   service: name="foreman-proxy" state=started enabled=yes
+  tags:
+    - foreman-proxy
+    - foreman-proxy-settings
