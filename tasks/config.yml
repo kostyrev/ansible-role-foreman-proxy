@@ -37,3 +37,8 @@
   tags:
     - foreman-proxy
     - foreman-proxy-settings
+
+- name: allow to connect to foreman-proxy port
+  firewalld: port="{{foreman_proxy_http_port}}/tcp" permanent=true state=enabled immediate=yes
+  tags:
+    - foreman-proxy
