@@ -5,6 +5,7 @@ foreman_proxy_user: 'foreman-proxy'
 foreman_proxy_group: 'foreman-proxy'
 foreman_proxy_protocol: http
 
+foreman_proxy_named_group: named
 # DO define those if you wanna that component to be managed by this foreman-proxy
 #foreman_proxy_tftp: "{{ foreman_proxy_protocol }}"
 #foreman_proxy_dhcp: "{{ foreman_proxy_protocol }}"
@@ -24,7 +25,7 @@ foreman_proxy_syslinux_dir: /usr/share/syslinux
 
 foreman_proxy_dhcp_vendor: isc
 foreman_proxy_dhcp_config: '/etc/dhcp/dhcpd.conf'
-foreman_proxy_dhcp_leases: /var/lib/dhcp/dhcpd.leases
+foreman_proxy_dhcp_leases: /var/lib/dhcpd/dhcpd.leases
 foreman_proxy_dhcp_omapi_port: 7911
 
 foreman_proxy_dns_provider: nsupdate
