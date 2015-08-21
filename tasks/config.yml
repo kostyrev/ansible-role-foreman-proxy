@@ -25,6 +25,13 @@
     - foreman-proxy
     - foreman-proxy-settings
 
+- name: add foreman-proxy to named group if we are managing dns with this foreman-proxy
+  user: name={{ foreman_proxy_user }} shell=/bin/false groups={{ foreman_proxy_named_group }} append=yes
+  when: foreman_proxy_dns is defined
+  tags:
+    - foreman-proxy
+    - foreman-proxy-dns
+
 - name: enable foreman-proxy service
   service: name="foreman-proxy" state=started enabled=yes
   tags:
