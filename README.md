@@ -1,40 +1,32 @@
 foreman-proxy
 =========
 
-This is almost bare role that installs and barely configures foreman-proxy.
+An Ansible role for installing a foreman-proxy on RHEL/CentOS 6/7.
 
-Docs are on the way.
+I use it to install foreman-proxy on plain http and so this role doesn't configures SSL but PRs are welcomed.
 
-PRs are welcomed.
+This role only manages foreman-proxy configuration and DOESN'T configure:
 
-Requirements
-------------
+- TFTP server
+- DHCP server
+- DNS server
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Requirements
 
-Role Variables
---------------
+- SELinux is expected to be enabled.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## Role Variables
 
-Dependencies
-------------
+| Variable                         | Default                  | Comments (type)                                                                           |
+| :---                             | :---                     | :---                                                                                      |
+| `foreman_proxy_user`             | `foreman-proxy`          | Under what user foreman-proxy should run                                                  |
+| `foreman_proxy_protocol`         | `foreman_proxy_protocol` | Protocol foreman-proxy will operate on. Values: http or https. Note: https was not tested |
+| `foreman_proxy_foreman_base_url` | `{{ ansible_fqdn }}`     | Url of Foreman Web UI                                                                     |
+| `foreman_proxy_ssl`              | `false`                  | Url of Foreman Web UI                                                                     |
+| `foreman_proxy_tftp`             | `http`                   | Should this role configure foreman-proxy settings for tftp AND what protocol will be user |
+| `foreman_proxy_dhcp`             | `http`                   | Should this role configure foreman-proxy settings for dhcp AND what protocol will be user |
+| `foreman_proxy_dns`              | `http`                   | Should this role configure foreman-proxy settings for dns AND what protocol will be user  |
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
 
 
 ## Contributing
