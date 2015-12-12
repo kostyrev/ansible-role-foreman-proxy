@@ -3,8 +3,7 @@
 foreman_proxy_register: false
 foreman_proxy_user: 'foreman-proxy'
 foreman_proxy_group: 'foreman-proxy'
-foreman_proxy_protocol: http
-
+foreman_proxy_protocol: "{{ 'http' if foreman_proxy_ssl == false else 'https' }}"
 foreman_proxy_named_group: named
 # DO define those if you wanna that component to be managed by this foreman-proxy
 #foreman_proxy_tftp: "{{ foreman_proxy_protocol }}"
@@ -39,9 +38,6 @@ foreman_proxy_ssl: false
 foreman_proxy_ssl_ca: /var/lib/puppet/ssl/certs/ca.pem
 foreman_proxy_ssl_cert: "/var/lib/puppet/ssl/certs/{{ ansible_fqdn }}.pem"
 foreman_proxy_ssl_key: "/var/lib/puppet/ssl/private_keys/{{ ansible_fqdn }}.pem"
-
-foreman_proxy_trusted_hosts:
-  - "{{ ansible_fqdn }}"
 
 foreman_proxy_foreman_base_url: "{{ ansible_fqdn }}"
 

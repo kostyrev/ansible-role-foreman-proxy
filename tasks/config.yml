@@ -13,6 +13,7 @@
   tags:
     - foreman-proxy
     - foreman-proxy-settings
+    - foreman-proxy-main-settings
 
 - name: render foreman-proxy settings.d templates
   template: src={{ item }} dest=/etc/foreman-proxy/settings.d/{{ item | basename | regex_replace('.j2','') }} owner=root group={{ foreman_proxy_group }} mode=0640

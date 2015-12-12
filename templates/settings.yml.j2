@@ -9,8 +9,8 @@
 # see http://theforeman.org/projects/smart-proxy/wiki/SSL for more information
 {% if foreman_proxy_ssl == true %}
 :ssl_ca_file: {{ foreman_proxy_ssl_ca }}
-:ssl_certificate: <%= scope.lookupvar("foreman_proxy::ssl_cert") %>
-:ssl_private_key: <%= scope.lookupvar("foreman_proxy::ssl_key") %>
+:ssl_certificate: {{ foreman_proxy_ssl_cert }}
+:ssl_private_key: {{ foreman_proxy_ssl_key }}
 {% else %}
 #:ssl_ca_file: {{ foreman_proxy_ssl_ca }}
 #:ssl_certificate: <%= scope.lookupvar("foreman_proxy::ssl_cert") %>
