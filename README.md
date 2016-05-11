@@ -1,5 +1,6 @@
 foreman-proxy
 =========
+[DEPRECATED] Please use new version of [foreman role](https://github.com/kostyrevaa/ansible-role-foreman) instead.
 
 An Ansible role for installing a foreman-proxy on RHEL/CentOS 6/7.
 
